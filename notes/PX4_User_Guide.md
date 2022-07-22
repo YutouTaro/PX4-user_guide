@@ -4,8 +4,6 @@
 
 [Tune Meanings (Pixhawk Series)](https://docs.px4.io/main/en/getting_started/tunes.html)
 
-
-
 **[Parameter Reference](https://docs.px4.io/main/en/advanced_config/parameter_reference.html)**
 
 # Contents
