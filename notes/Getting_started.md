@@ -148,21 +148,28 @@ Multicopter:
 ## Legend
 The icons below are used within the document:
 
-* <img src="../assets/site/remote_control.svg" width="30px" /> <a name="key_manual"></a>
-    * Manual mode. Remote control required.
-* <img src="../assets/site/automatic_mode.svg" width="30px" />  <a name="key_automatic"></a>
-    * Automatic mode. RC control is disabled by default except to change modes. 
-* <img src="../assets/site/position_fixed.svg" width="30px" /> <a name="key_position_fixed"></a>
-    * Position fix required (e.g. GPS, VIO, or some other positioning system).
-* <img src="../assets/site/altitude_icon.svg" width="30px" />  <a name="altitude_only"></a>
-    * Altitude required (e.g. from barometer, rangefinder). 
-* <img src="../assets/site/difficulty_easy.png" width="30px" /> <img src="../assets/site/difficulty_medium.png" width="30px" /> <img src="../assets/site/difficulty_hard.png" width="30px" /> <a name="key_difficulty"></a>
-    * Flight mode difficulty (Easy to Hard) 
+* <img src="../assets/site/remote_control.svg" title="Manual/Remote control required" width="30px" /> <a name="key_manual"></a> Manual mode. Remote control required.
+* <img src="../assets/site/automatic_mode.svg" title="Automatic mode" width="30px" />  <a name="key_automatic"></a> Automatic mode. RC control is disabled by default except to change modes. 
+* <img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" /> <a name="key_position_fixed"></a> Position fix required (e.g. GPS, VIO, or some other positioning system).
+* <img src="../assets/site/altitude_icon.svg" title="Altitude fix required (e.g. barometer, rangefinder)" width="30px" />  <a name="altitude_only"></a> Altitude required (e.g. from barometer, rangefinder). 
+* <img src="../assets/site/difficulty_easy.png" title="Easy to fly" width="30px" /> <img src="../assets/site/difficulty_medium.png" title="Medium difficulty to fly" width="30px" /> <img src="../assets/site/difficulty_hard.png" title="Hard to fly" width="30px" /> <a name="key_difficulty"></a> Flight mode difficulty (Easy to Hard) 
+
+<!--
+| **Icon**                                                                                                                                                                                    | **Description**                                                                                        |
+|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|--------------------------------------------------------------------------------------------------------|
+| <img src="../assets/site/remote_control.svg" title="Manual/Remote control required" width="30px" />                                                                                                                                | Manual mode. Remote control required.                                         |
+| <img src="../assets/site/automatic_mode.svg" title="Automatic mode" width="30px" />                                                                                                                                | Automatic mode. RC control is disabled by default except to change modes. <a name="key_automatic"></a> |
+| <img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" />                                                                                                                                | Position fix required (e.g. GPS, VIO, or some other positioning system).                               |
+| <img src="../assets/site/altitude_icon.svg" title="Altitude fix required (e.g. barometer, rangefinder)" width="30px" />                                                                                                                                 | Altitude required (e.g. from barometer, rangefinder).                                                  |
+| <img src="../assets/site/difficulty_easy.png" title="Easy to fly" width="30px" /> <img src="../assets/site/difficulty_medium.png" title="Medium difficulty to fly" width="30px" /> <img src="../assets/site/difficulty_hard.png" title="Hard to fly" width="30px" /> | Flight mode difficulty (Easy to Hard)                                                                  |
+-->
 
 
 ## Multicopter
 ### Position Mode 位置模式 <a name="position-mode-mc"></a>
-[<img src="../assets/site/difficulty_easy.png" width="30px" />](#key_difficulty)&nbsp;[<img src="../assets/site/remote_control.svg" width="30px" />](#key_manual)&nbsp;[<img src="../assets/site/position_fixed.svg" width="30px" />](#key_position_fixed)
+[<img src="../assets/site/difficulty_easy.png" title="Easy to fly" width="30px" />](#key_difficulty) [<img src="../assets/site/remote_control.svg" title="Manual/Remote control required" width="30px" />](#key_manual) [<img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" />](#key_position_fixed)
+
+Easy, manual, position
 
 * Easy-to-fly RC mode
     * Roll and pitch sticks control acceleration over ground in vehicles forward-back and left-right directions
@@ -175,7 +182,9 @@ The icons below are used within the document:
 ![MC Position Mode](../assets/flight_modes/position_MC.png)
 
 ## Altitude Mode 定高模式 <a name="altitude-mode-mc"></a>
-[<img src="../assets/site/difficulty_easy.png" width="30px" />](#key_difficulty) [<img src="../assets/site/remote_control.svg" width="30px" />](#key_manual) [<img src="../assets/site/altitude_icon.svg" width="30px"/>](#altitude_only)
+[<img src="../assets/site/difficulty_easy.png" title="Easy to fly" width="30px" />](#key_difficulty) [<img src="../assets/site/remote_control.svg" title="Manual/Remote control required" width="30px" />](#key_manual) [<img src="../assets/site/altitude_icon.svg" title="Altitude fix required (e.g. barometer, rangefinder)" width="30px"/>](#altitude_only)
+
+Easy, manual, altitude
 
 * _relatively_ easy-to-fly RC mode
     * Roll and pitch sticks control vehicle movement in the left-right and forward-back directions
@@ -188,6 +197,9 @@ The icons below are used within the document:
 > Safest _non-GPS_ manual mode for new fliers.
 
 ## Manual/Stabilized Mode 手动/自稳模式 <a name="manual-stabilized-mode-mc"></a>
+[<img src="../assets/site/difficulty_medium.png" title="Medium difficulty to fly" width="30px" />](#key_difficulty) [<img src="../assets/site/remote_control.svg" title="Manual/Remote control required" width="30px" />](#key_manual)
+
+Medium, manual
 
 * Mode
     * Roll and pitch sticks control the angle of the vehicle (attitude)
@@ -201,7 +213,10 @@ The icons below are used within the document:
 
 ![MC Manual Flight](../assets/flight_modes/manual_stabilized_MC.png)
 
-## Acro Mode <a name="acro-mode-mc"></a>
+## Acro Mode 特技模式 <a name="acro-mode-mc"></a>
+[<img src="../assets/site/difficulty_hard.png" title="Hard to fly" title="Hard to fly" width="30px" />](#key_difficulty) [<img src="../assets/site/remote_control.svg" title="Manual/Remote control required" title="Manual/Remote control required" width="30px" />](#key_manual)
+
+Hard, manual
 
 * RC mode for performing acrobatic maneuvers e.g. rolls and loops.
     * The roll, pitch and yaw sticks control the **rate of angular rotation** around the respective axes
@@ -210,31 +225,77 @@ The icons below are used within the document:
 ![MC Manual Acrobatic Flight](../assets/flight_modes/manual_acrobatic_MC_edited.png)
 P.S. Up for left stick means move to the "top" direction of the vehicle, even when the vehicle is upside down 
 
-## 
+## Orbit Mode 环绕模式 <a name="orbit-mode-mc"></a>
+[<img src="../assets/site/difficulty_easy.png" title="Easy to fly" width="30px" />](#key_difficulty) [<img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" />](#key_position_fixed)
+
+Easy, position
+
+* a mode to command a multicopter to fly in a circle
+    * the vehicle keeps yawing so that it always faces towards the center
+* <u>Ground control station (GCS)</u> is required
+    * to set the center position and initial radius of the orbit
+    * Default setting: 1m/s in clockwise direction
+![Orbit Mode - MC](../assets/flight_modes/orbit_MC.png)
+
+##  Hold Mode 保持模式<a name="hold-mode-mc"></a>
+[<img src="../assets/site/automatic_mode.svg" title="Automatic mode" width="30px" />](#key_automatic)&nbsp;[<img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" />](#key_position_fixed)
+
+Auto, position
+
+* stop and hover at its current position and altitude
+    * maintaining position against wind and other forces
+* used for <u>pause a mission</u> or help to <u>regain control</u> in emergency
+* How to activate: 
+    * pre-programmed RC switch, **pause** botton in QGC
+
+## Return Mode返航模式 <a name="return-mode-mc"></a>
+[<img src="../assets/site/automatic_mode.svg" title="Automatic mode" width="30px" />](#key_automatic)&nbsp;[<img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" />](#key_position_fixed)
+
+Auto, position
+
+* fly to a clear path to a safe location
+* How to activate: 
+    * manually (pre-programmed RC switch)
+    * automatically (i.e. failsafe triggered)
+
+## Mission Mode 任务模式 <a name="mission-mode-mc"></a>
+[<img src="../assets/site/automatic_mode.svg" title="Automatic mode" width="30px" />](#key_automatic)&nbsp;[<img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" />](#key_position_fixed)
+
+Auto, position
+
+* execute a predefined autonomous mission (flight plan)
+    * The mission has to be uploaded to the flight controller in advance
+    * typically created and uploaded with a GCS application (i.e. QGC)
+
+## Takeoff Mode 起飞模式 <a name="takeoff-mode-mc"></a>
+[<img src="../assets/site/automatic_mode.svg" title="Automatic mode" width="30px" />](#key_automatic)&nbsp;[<img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" />](#key_position_fixed)
+
+Auto, position
+
+* climb vertically to takeoff altitude and hover in position
+
+## Land Mode 降落模式 <a name="land-mode-mc"></a>
+[<img src="../assets/site/automatic_mode.svg" title="Automatic mode" width="30px" />](#key_automatic)&nbsp;[<img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" />](#key_position_fixed)
+
+Auto, position
+
+* land at the location at which the mode was engaged.
+
+## Follow Me Mode 跟随模式 <a name="follow-me-mode-mc"></a>
+[<img src="../assets/site/automatic_mode.svg" title="Automatic mode" width="30px" />](#key_automatic)&nbsp;[<img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" />](#key_position_fixed)
+
+Auto, position
+
+* autonomously follow and track a user providing their current position setpoint. 
+    * Position setpoints might come from a phone/tablet running _QGroundControl_ or from a MAVSDK app
+        * currently QGC only available on Android
+
+## Offboard Mode 外部模式 <a name="offboard-mode-mc"></a>
+[<img src="../assets/site/automatic_mode.svg" title="Automatic mode" width="30px" />](#key_automatic)&nbsp;[<img src="../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="30px" />](#key_position_fixed)
+
+Auto, position
+
+* obey a position, velocity or attitude setpoint provided over MAVLink.
+    * This mode is intended for vehicle control from **companion computers and ground stations**!
 
 
-<a name="orbit-mode-mc"></a>
-
-<a name="hold-mode-mc"></a>
-<a name="return-mode-mc"></a>
-<a name="mission-mode-mc"></a>
-<a name="takeoff-mode-mc"></a>
-<a name="land-mode-mc"></a>
-<a name="follow-me-mode-mc"></a>
-<a name="offboard-mode-mc"></a>
-
-
-
-
-
-
-
-<!--
-| **Icon**                                                                                                                                                                                    | **Description**                                                                                        |
-|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|--------------------------------------------------------------------------------------------------------|
-| <img src="../assets/site/remote_control.svg" width="30px" />                                                                                                                                | Manual mode. Remote control required.                                         |
-| <img src="../assets/site/automatic_mode.svg" width="30px" />                                                                                                                                | Automatic mode. RC control is disabled by default except to change modes. <a name="key_automatic"></a> |
-| <img src="../assets/site/position_fixed.svg" width="30px" />                                                                                                                                | Position fix required (e.g. GPS, VIO, or some other positioning system).                               |
-| <img src="../assets/site/altitude_icon.svg" width="30px" />                                                                                                                                 | Altitude required (e.g. from barometer, rangefinder).                                                  |
-| <img src="../assets/site/difficulty_easy.png" width="30px" /> <img src="../assets/site/difficulty_medium.png" width="30px" /> <img src="../assets/site/difficulty_hard.png" width="30px" /> | Flight mode difficulty (Easy to Hard)                                                                  |
--->
