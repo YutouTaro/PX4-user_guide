@@ -6,6 +6,10 @@
 
 **[Parameter Reference](https://docs.px4.io/main/en/advanced_config/parameter_reference.html)**
 
+[LED signal meanings](https://docs.px4.io/main/en/getting_started/led_meanings.html)
+
+
+
 # Contents
 
 * [Getting Started](./Getting_started.md)
