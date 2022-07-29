@@ -2,7 +2,7 @@
 
 # Mounting the Flight Controller
 
-## Orientation
+## Orientation <a name="orientation"></a>
 
 The flight controller should be placed on the vehicle frame **top-side up**, oriented so that the <u>heading mark arrow</u> points towards the **front** of the vehicle. 
 
@@ -254,37 +254,139 @@ Cube comes with most (or all) of the accessories you will need when [purchased]
 
 ![Cube - Wiring Overview](../assets/flight_controller/cube/cube_wiring_overview.jpg)
 
-1. [Telemetry System](#telemetry) allows to <u>play/run missions, control & monitor vehicle</u> in real time. Typically includes telemetry radios, tablet/PC and ground station software.
+1. [Telemetry System](#telemetry) (**`TELEM1`**) allows to <u>play/run missions, control & monitor vehicle</u> in real time. Typically includes telemetry radios, tablet/PC and ground station software.
 
-2. [Buzzer](#buzzer) — Provides <u>audio signals</u> that indicate what the UAV is doing
+2. [Buzzer](#buzzer) (**`USB`**)— Provides <u>audio signals</u> that indicate what the UAV is doing
 
-3. [Remote Control Receiver System](#rc_control) — <u>Connects to a hand-held transmitter</u> that an operator can use to manually fly the vehicle (shown is a PWM receiver with PWM->PPM converter).
+3. [Remote Control Receiver System](#rc_control) (**`RCIN`**)  — <u>Connects to a hand-held transmitter</u> that an operator can use to manually fly the vehicle (shown is a PWM receiver with PWM->PPM converter).
 
-4. (Dedicated) [Safety switch](#safety-switch) — Press and hold to lock and unlock motors. Only required if you are not using the recommended [GPS](#gps) with inbuilt safety switch.
+4. (Dedicated) [Safety switch](#safety-switch) (_`GPS1`_) — Press and hold to lock and unlock motors. Only required if you are not using the recommended [GPS](#gps) with inbuilt safety switch.
 
-5. [GPS, Compass, LED, Safety Switch](#gps) — The recommended GPS module contains GPS, Compass, LED and Safety Switch. 
+5. [GPS, Compass, LED, Safety Switch](#gps) (_`GPS1`_) — The recommended GPS module contains GPS, Compass, LED and Safety Switch. 
 
-6. [Power System](#power) — Powers Cube and the motor ESCs. Consists of LiPo battery, power module, and optional battery warning system (audio warning if battery power goes below a predefined level). 
+6. [Power System](#power) (**`POWER1`**)— Powers Cube and the motor ESCs. Consists of LiPo battery, power module, and optional battery warning system (audio warning if battery power goes below a predefined level). 
 
-> The port `GPS2` maps to `TEL4` in PX4. i.e. if connecting to `GPS2`, assign the [serial port configuration parameter](https://docs.px4.io/main/en/peripherals/serial_configuration.html) for the connected hardware to `TEL4`
+> The port **`GPS2`** maps to **`TEL4`** in PX4. i.e. if connecting to **`GPS2`**, assign the [serial port configuration parameter](https://docs.px4.io/main/en/peripherals/serial_configuration.html) for the connected hardware to **`TEL4`**
 
+> More information about available ports can be found here: [Cube > Ports](https://docs.px4.io/main/en/flight_controller/pixhawk-2.html#ports).
 
+# Mount and Orient Controller
 
+Mount the Cube as close as possible to the <u>vehicle's center of gravity</u>, ideally oriented <u>top-side up</u> and with the <u>arrow pointing towards the front</u> of the vehicle. 
 
+> For non-default orientation, please configure the autopilot software with the orientation. [Flight Controller Orientation](#orientation).
+
+- The Cube can be mounted using either
+  
+  - vibration-damping foam pads (included in the kit) or
+  
+  - mounting screws
+    
+    - the screws provided are or 1.8mm thick frameboard
+    
+    - customized ones can be M2.5, with thread length inside Cube range 6~7.55mm. 
+
+![Cube Mount - Mounting Plate](../assets/flight_controller/cube/cube_mount_plate_screws.jpg)
 
 ## Telemetry System (Optional) <a name="telemetry"></a>
 
+A telemetry system allows you to <u>communicate with</u>, <u>monitor</u>, and <u>control</u> a vehicle in flight from a ground station (for example, you can direct the UAV to a particular position, or upload a new mission).
+
+The vehicle-based radio should be connected to the **`TELEM1`** port (if connected to this port, no further configuration is required).
+
+The other radio is connected to ground station computer/mobile device (usually via USB). 
+
+![Telemetry Radio](../assets/flight_controller/cube/cube_schematic_telemetry.jpg)
+
 ## Buzzer <a name="buzzer"></a>
+
+Connect to **`USB`** port, no further configuration is required
 
 ## Radio Control <a name="rc_control"></a>
 
+A remote control (RC) radio system is required for control the vehicle *manually*. 
 
+Instructions of how to connect different types of receivers. 
 
-<a name="safety-switch"></a>
+### PPM-SUM / Futaba S.Bus receivers
 
-<a name="gps"></a>
-<a name="power"></a>
-<!--a name=""></a-->
-<!--a name=""></a-->
+ground (-), power (+), and signal (S) to the RC pins (**`RCIN`**)
 
+![Cube - RCIN](../assets/flight_controller/cube/cube_rc_in.jpg)
 
+"Spektrum Satellite Receivers" and "PWM Receivers", skipped
+
+## Safety Switch <a name="safety-switch"></a>
+
+Only required when not using the recommended GPS (which has a inbuilt safety switch)
+
+When flying without a GPS, must attach the switch directly to the **`GPS1`** port in order to arm the vehicle and fly. 
+
+## GPS + Compass + Safety Switch + LED <a name="gps"></a>
+
+- Recommended GPS modules: *Here* and *Here+*
+  
+  - incorporate a GPS module, Compass, Safety Switch and LEDs
+  
+  - Here+ supports centimeter level positioning via RTK
+
+- The module should be 
+  
+  - mounted on the frame as <u>far away from other electronics </u>as possible, 
+  
+  - with the <u>direction marker towards the front </u>of the vehicle
+  
+  - connected to the **`GPS1`** port using the supplied <u>8-pin cable</u>.
+
+- The safety switch is integrated with the GPS module, and enabled by default 
+  
+  - To disable, press and hold the safety switch for 1 second. 
+  
+  - You can press the safety switch again to enable safety and disarm the vehicle
+  
+  a schematic view of the module and its connections
+  
+  ![Here+ Connector Diagram](../assets/flight_controller/cube/here_plus_connector.png)
+
+## Power<a name="power"></a>
+
+Cube is powered from a Lithium Ion Polymer (LiPo) Battery via a Power Module. 
+
+The battery is connected to the **`POWER1`** port.
+
+The power module supplies the board, and may separately supply power to electronic speed controllers (ESCs).
+
+A typical power setup for a multicopter vehicle:
+
+![Power Setup - MC](../assets/flight_controller/cube/cube_wiring_power_mc.jpg)
+
+> The power (+) rail of **MAIN/AUX** is *not powered* by the power module supply to the flight controller. In order to drive servos for rudders, elevons, etc., it will need to be separately powered.
+> 
+> This can be done by connecting the power rail to a BEC equipped ESC, a standalone 5V BEC, or a 2S LiPo battery. Ensure the voltage of servo you are going to use is appropriate!
+
+## SD Card (optional)
+
+SD card is needed to log and analyse flight details, run missions, and to use UAVCAN-bus hardware. 
+
+The SD card slot can be found as shown.
+
+![Cube - Mount SDCard](../assets/flight_controller/cube/cube_sdcard.jpg)
+
+## Motors
+
+Motors/servos are connected to the **MAIN** and **AUX** ports in the order specified for your vehicle in the [Airframe Reference](https://docs.px4.io/main/en/airframes/airframe_reference.html).
+
+> If the frame is not listed in the reference, a "generic" airframe of the correct type can be used. 
+
+> **Make sure the correct mapping is used!!!** 
+> 
+> The mapping is not consistent across frames (e.g. throttle for different frames is on different outputs)
+
+![Cube - Motor Connections](../assets/flight_controller/cube/cube_main_aux_outputs.jpg)
+
+For [quadrotor x](https://docs.px4.io/main/en/airframes/airframe_reference.html#quadrotor-x)
+
+* **MAIN1**: motor 1
+* **MAIN2**: motor 2
+* **MAIN3**: motor 3
+* **MAIN4**: motor 4
