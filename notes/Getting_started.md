@@ -43,7 +43,9 @@
 Three power states defined by PX4:
 
 * **Disarmed**: All motors and actuators are unpowered.
+
 * **Prearmed**: Motors are unpowered, actuators are powered (allowing non-dangerous actuators to be bench-tested).
+
 * **Armed:** Motors and other actuators are powered, and propellers may be spinning.
   
   > **<u>Arm vehicles only when necessary!!!</u>**
@@ -322,8 +324,11 @@ Auto, position
 * provide user-facing status info related to readiness for flight
   
   > FMUv4 does not have one on board, and typically uses an LED mounted on the GPS
+
 * **WARNING** GPS lock (green LED) does not guarentee the vehicle can be armed. PX4 has to **pass the preflight checks**. 
+
 * In the event of an error (blinking red), or can't achieve GPS lock (change from blue to green), check details from QGC, including 
+  
   * <u>calibration status, and error messages reported by the Preflight Checks (Internal)</u>
   * <u>GPS module is attached properly, Pixhawk is reading the GPS properly, and GPS is sending a proper GPS position</u>
 
@@ -360,8 +365,7 @@ Auto, position
 ### Status LED
 
 * provide status for PX4IO and FMU SoC, indicating power, bootloader mode and activity and errors
-  
-  
+
   _No lights on PX4, skipped_
 
 ## Tune Meanings
