@@ -16,5 +16,5 @@ _book
 
 #backup files
 *.bak
-notes/Basic_assembly.pdf
-notes/Getting_started.pdf
+notes/*.pdf
+
