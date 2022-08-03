@@ -262,7 +262,7 @@ Cube comes with most (or all) of the accessories you will need when [purchased]
 
 4. (Dedicated) [Safety switch](#safety-switch) (_`GPS1`_) — Press and hold to lock and unlock motors. Only required if you are not using the recommended [GPS](#gps) with inbuilt safety switch.
 
-5. [GPS, Compass, LED, Safety Switch](#gps) (_`GPS1`_) — The recommended GPS module contains GPS, Compass, LED and Safety Switch. 
+5. [GPS, Compass, LED, Safety Switch](#gps) (**`GPS1`**) — The recommended GPS module contains GPS, Compass, LED and Safety Switch. 
 
 6. [Power System](#power) (**`POWER1`**)— Powers Cube and the motor ESCs. Consists of LiPo battery, power module, and optional battery warning system (audio warning if battery power goes below a predefined level). 
 
@@ -380,9 +380,7 @@ Motors/servos are connected to the **MAIN** and **AUX** ports in the order s
 
 > **Make sure the correct mapping is used!!!** 
 > 
-> The mapping is not consistent across frames (e.g. throttle for different frames is on different outputs)
-
-![Cube - Motor Connections](../assets/flight_controller/cube/cube_main_aux_outputs.jpg)
+> The mapping is not consistent across frames (e.g. throttle for different frames is on different outpu
 
 For [quadrotor x](https://docs.px4.io/main/en/airframes/airframe_reference.html#quadrotor-x)
 

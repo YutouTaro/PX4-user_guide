@@ -365,7 +365,7 @@ Auto, position
 ### Status LED
 
 * provide status for PX4IO and FMU SoC, indicating power, bootloader mode and activity and errors
-
+  
   _No lights on PX4, skipped_
 
 ## Tune Meanings

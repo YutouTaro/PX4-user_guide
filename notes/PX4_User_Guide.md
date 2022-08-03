@@ -8,8 +8,9 @@
 
 [LED signal meanings](https://docs.px4.io/main/en/getting_started/led_meanings.html)
 
-
-
 # Contents
 
 * [Getting Started](./Getting_started.md)
+* [Basic Assembly](./Basic_assembly.md)
+* [Basic Configuration](./Basic_configuration.md)
+* 
