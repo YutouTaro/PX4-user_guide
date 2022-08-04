@@ -274,7 +274,7 @@ Steps for _FrSky L9R_ receiver as an example:
 
 1. Disconnect the receiver from power
 
-2. Press and hold the _Fail Save_ button while connect it to power
+2. Press and hold the _Failsave_ (F/S) button while connect it to power
    
    - PX4 `RCIN` channel, receiver `SBUS` channel
    
@@ -391,3 +391,254 @@ Common modes:
 > Emergency Kill switch channel Channel 12
 > 
 > Return switch channel Channel 10
+
+# Battery
+
+Methods can be used to estimate the capacity:
+
+- **Basic Battery Settings**(default) - A coarse estimation by comparing the raw measured voltage to the voltage range of "empty" to "full". 
+
+- **Voltage-based Estimation with Load Compensation** - Counteracts the effects of loading on the capacity calculation.
+
+- **Voltage-based Estimation with Current Integration** - Fuses the load-compensated voltage-based estimate for the available capacity with a current-based estimate of the charge that has been consumed. This results in a capacity estimate that is comparable to that of a smart battery.
+
+> To ensure the battery failsafe is managed by PX4 instead of ESC, disable ESC's low voltage cutoff or set it below expected minimum voltage. 
+
+[Battery-Type Comparison](#battery-type-comparison) below explains the difference between the main battery types, and how that impacts the battery settings.
+
+>  The parameters `BAT1_xxx` used in the following refers to battery 1, if more than one battery is used, just replace `1` by the corresponding battery number.
+
+## Basic Battery Settings (default) <a name="basic_settings"></a>
+
+Configuration of basic settings for <u>battery 1</u>:
+
+1. Connect vehicle
+   
+    ![qgc_setup_power_px4](./pic/qgc_setup_power_px4.png)
+
+2. QGC > `Vehicle Setup` > `Power`
+
+3. Set number of cells (in Series) `BAT1_N_CELLS`
+   
+   > If the number of cells is not supplied, it can be calculated by dividing the battery voltage by nominal voltage (3.7V) 
+
+4. Set Empty Voltage (per cell) `BAT1_V_EMPTY`
+   
+   - Value too low may over-discharge and damage the battery, too high may limit the flight time
+   
+   - A rule of thumb for LiPo:
+     
+     - "Real" minimum (voltage under load/while flying : **<u>3.5V</u>**
+     
+     - Conservative (voltage under no-load): 3.7V
+
+5. Set Full Voltage (per cell) `BAT1_V_FULL`
+   
+   - LiPo: 4.05V (default in QGroundControl)
+
+6. Set Voltage Divider `BAT1_V_DIV`
+   
+   - Measure the battery voltage using a multimeter
+   
+   - Click `Calculate` beside `Voltage divider` 
+   
+   - Key in the voltage value measured above to `Measured voltage`
+   
+   - Click `Calculate`, and `Close` the pop-up window
+
+7. Set Amps per volt `BAT1_A_PER_V`
+   
+   > Not needed for basic configuration
+   
+   - Measure the current of the battery
+   
+   - Click `Calculate` beside `Amps per volt`
+   
+   - Key in the current value measured above to `Measured current`
+   
+   - Click `Calculate`, and `Close` the pop-up window
+   
+   - ![qgc_setup_power_px4_v_div](./pic/qgc_setup_power_px4_v_div.png)
+
+## Voltage-based Estimation with Load Compensation <a name="current_based_load_compensation"></a>
+
+Follow [the basic configuration](#basic_settings), but set a higher value (than without compensation) for _Empty Voltage_ (`BAT_V_EMPTY`). Then perform one of the following methods by setting either of the two parameters:
+
+- **Current-based Load Compensation (recommended)**
+1. Set parameter `BAT1_R_INTERNAL` to the internal resistance of battery 1 (and other batteries for the parameter respectively)
+   
+   > There are LiPo chargers can measure the internal resistance. A typical value is 5mΩ per cell, this can vary with discarge current rating, age and health of the cells
+
+2. Calibrate _Amps per volt divider_ in the basic settings
+- **Thrust-based Load Compensation**
+1. Set the parameter `BAT1_V_LOAD_DROP` to the voltage drop a cell under the load of full throttle
+
+## Voltage-based Estimation with Current Integration
+
+1. Follow the steps in [current-based load compensation](#current_based_load_compensation), including *calibrating the Amps per volt divider*
+
+2. Set `BAT1_CAPACITY` to around 90% of the advertised battery capacity (it usually printed on the battery label)
+
+> This would give you a very accurate measurement of the relative battery consumption. If set up correctly, and with a healthy and fresh charged battery on every boot, the estimation quality will be comparable to that from a smart battery. 
+
+## Battery Type Comparison <a name="battery-type-comparison"></a>
+
+**Overview**
+
+- Li-Ion batteries have a higher energy density than LiPo battery packs but lower discharge rate and higher battery cost.
+
+- LiPo are readily available and common in multi-roter aircraft
+
+- **LiPo**
+  
+  - Advantages
+    
+    - Wide range of sizes, capacities and voltages
+    
+    - Inexpensive
+    
+    - High charge rates and C ratings (discharge rates relative to capacity)
+  
+  - Disadvantages
+    
+    - Low energy density (relative to Li-Ion)
+    
+    <!-- - Varying quality (due to abundance of suppliers) this line sounds weird-->
+
+- **Li-Ion**
+  
+  - Advantages
+    
+    - High energy density (up to 60% higher)
+  
+  - Disadvantages
+    
+    - Expensive
+    
+    - Limited choices of size and configurations
+    
+    - Lower charge rates and C rating
+    
+    - Difficult to adapt to vehicles that require high currents
+    
+    - Requires more stringent temperature monitoring during charge and discharge
+
+**C Ratings**
+
+- A C rating is simply a multiple of the stated capacity of any battery type.
+
+- relevant to but differs from both charge and discharge rates. 
+  
+  - Example: 2000 mAh battery (irrespective of voltage) with a 10C discharge rate can safely and continously discharge 20 amps of current ( $2000\text{mAh} \times 10\text{C} = 2\text{Ah} \times 10\text{C} = 20 \text{A}$ )
+
+- C Rating is always given by the manufacturer (often on the outside of the battery pack)
+  
+  - It can actually be calculated, with serval pieces of information including the measurement of internal resistance of cells.
+
+- Following manufacturer guidelines for both charge and discharge C ratings is very important for the health of your battery and to operate your vehicle safely
+  
+  - i.e. reduce fires, “puffing” packs and other suboptimal states during charging and discharging
+
+# Safety Configuration (Failsafe)
+
+Safety features to protect and recover vehicle if something goes wrong:
+
+- <u>Failsafe</u> allow you to specify areas and conditions under which you can safely fly, and the [action](#failsafe-actions) that will be performed if a failsafe is triggered
+  
+  - The most important failsafe settings are configured in QGC `Safety Setup` [page](#qgroundcontrol-safety-setup), others can be configured via [parameters](#other-safety-settings).
+
+- [Safety switches](#emergency-switches) on the remote control can be used to immediately stop motors or return the vehicle in the event of a problem.
+
+## Failsafe Actions <a name="failsafe-actions"></a>
+
+Some of the common failsafe actions:
+
+| Action                                                     | Description                                                                                                                                                                                                                                                                                                 |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a name="action_none"></a>None/Disabled                    | No action (the failsafe will be ignored).                                                                                                                                                                                                                                                                   |
+| <a name="action_warning"></a>Warning                       | A warning message will be sent to *QGroundControl*.                                                                                                                                                                                                                                                         |
+| <a name="action_hold"></a>Hold mode                        | The vehicle will enter *Hold mode*. <br/>Hover for multicopters, circle for fixed wing.                                                                                                                                                                                                                     |
+| <a name="action_return"></a>Return mode                    | The vehicle will enter *Return mode*. <br/>Return behaviour can be set in the [Return Home Settings](#return-mode-settings) (below).                                                                                                                                                                        |
+| <a name="action_land"></a>Land mode                        | The vehicle will enter *Land mode*, and lands immediately.                                                                                                                                                                                                                                                  |
+| <a name="action_flight_termination"></a>Flight termination | Turns off all controllers and sets all PWM outputs to their failsafe values (e.g. `PWM_MAIN_FAILn`, `PWM_AUX_FAILn`). <br/>The failsafe outputs can be used to deploy a parachute, landing gear or perform another operation. For a fixed-wing vehicle this might allow you to glide the vehicle to safety. |
+| <a name="action_lockdown"></a>Lockdown                     | Kills the motors (sets them to disarmed). This is the same as using the [kill switch](#kill-switch).                                                                                                                                                                                                        |
+
+> The vehicle can recover from a failsafe action by switching modes, if the cause is fixed. For example, the vehicle is in _Return Mode_ due to _RC Loss failsafe_, if the RC is recovered you can change to *Position mode* and continue the flight. 
+
+> If a failsafe occurs while the vehicle is responding to another failsafe (e.g. low battery while in Return mode due to RC Loss), the action for the second trigger is ignored. Instead the action is determined by separate system level and vehicle specific code. This might result in the vehicle being changed to a manual mode so the user can directly manage recovery.
+
+## QGroundControl Safety Setup <a name="qgroundcontrol-safety-setup"></a>
+
+The safety setup page can be found in QGC > `Vehicle Setup` > `Safety`.
+
+### Low Battery Failsafe
+
+The low battery failsafe is triggered when <u>the battery capacity drops below the level values</u>.
+
+Recommended Setting:
+
+- Failsafe Action: Return at critical level, land at emergency level
+
+- Battery Warn level: 15%
+
+- Battery Failsafe level: 7%
+
+- Battery Emergency level: 5%
+
+![safety_battery](./pic/safety_battery.png)
+
+### RC Loss Failsafe
+
+The RC Loss failsafe may be triggered if <u>the RC transmitter link is lost in manual modes</u> (by default RC loss does not trigger the failsafe in missions, hold mode, or offboard mode).
+
+- Failsafe Action: Return mode
+
+- RC Loss Timeout: 0.5s
+
+### Data Link Loss Failsafe
+
+The Data Link Loss failsafe is triggered if <u>a telemetry link (connection to ground station) is lost when flying a mission</u>.
+
+- Failsafe Action: Return mode
+
+- Data Link Loss Timeout: 10s
+
+### Geofence Failsafe
+
+The Geofence Failsafe will trigger if <u>the vehicle moves outside the radius or above the altitude of the geofence</u>.
+
+### Return Mode Settings <a name="return-mode-settings"></a>
+
+| Setting           | Parameter       | Description                                                                                            |
+| ----------------- | --------------- | ------------------------------------------------------------------------------------------------------ |
+| Climb to altitude | RTL_RETURN_ALT  | Vehicle ascend to this minimum height (if below it) for the return flight.                             |
+| Return behaviour  |                 | Choice list of *Return then*: Land, Loiter and do not land, or Loiter and land after a specified time. |
+| Loiter Altitude   | RTL_DESCEND_ALT | If return with loiter is selected you can also specify the altitude at which the vehicle hold.         |
+| Loiter Time       | RTL_LAND_DELAY  | If return with loiter then land is selected you can also specify how long the vehicle will hold.       |
+
+
+
+> The return behaviour is defined by RTL_LAND_DELAY.
+> If negative the vehicle will land immediately.
+> Additional information can be found in [Return Mode](https://docs.px4.io/main/en/flight_modes/return.html)
+
+
+
+### Land Mode Settings
+
+| Setting              | Parameter       | Description                                                                                                                          |
+| -------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Disarm After         | COM_DISARM_LAND | Select checkbox to specify that the vehicle will disarm after landing. The value must be non-zero but can be a fraction of a second. |
+| Landing Descent Rate | MPC_LAND_SPEED  | Rate of descent (Multicopter only).                                                                                                  |
+
+
+
+## Other Failsafe Settings
+
+
+
+## Emergency Switches <a name="emergency-switches"></a>
+
+### Kill Switch <a name="kill-switch"></a>
+
+## Other Safety Settings <a name="other-safety-settings"></a>
