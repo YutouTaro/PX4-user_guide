@@ -263,3 +263,131 @@ After the orientation is set and level-horizon calibration is complete, check in
 <p align="center">
     <img src="./pic/calibration_verification.png" /> 
 </p>
+
+# Radio Setup <a name="radio_setup"></a>
+
+## Binding the Receiver
+
+FrSky receiver, follow the instructions here [How to bind FrSky X8R receiver to Taranis X9D transmitter in D16 mode - YouTube](https://www.youtube.com/watch?v=1IYg5mQdLVI)
+
+Steps for _FrSky L9R_ receiver as an example:
+
+1. Disconnect the receiver from power
+
+2. Press and hold the _Fail Save_ button while connect it to power
+   
+   - PX4 `RCIN` channel, receiver `SBUS` channel
+   
+   - The green and red lights will be on at the same time
+
+3. Start binding on the transmitter
+   
+   - From the main interface, ***MENU*** > ***PAGE*** to open `MODEL SETUP` > near the bottom `Internal RF` > `Receiver No.` > `[bind]`, press ***ENT***, you will hear beep sound from the transmitter
+   
+   - On the receiver, the red light will be flashing, and green light remains on
+
+4. Turn off the receiver and transmitter
+   
+   - turning off transmitter may not be necessary
+
+5- Turn on both
+
+- the green light will be on (red light off)
+
+Binding process is completed
+
+## RC Loss Detection
+
+PX4 needs to detect signal loss from RC controller in order to take appropriate safety measures. 
+
+Ways of RE receivers indicating signal loss:
+
+- Output nothing (automatically detected by PX4)
+
+- Output a low throttle value (can configure PX4 to detect this)
+
+- Output the last received signal (*<u>cannot</u>* be detected by PX4, as it looks like a valid input)
+
+If RC receiver does not support no signal output on signal loss, you have to configure it to set throttle low instead, and set the corresponding value in `RC_FAILS_THR`
+
+> DO NOT use a receiver that cannot support one of the two supported RC loss detection methods
+
+## RC Calibration
+
+Demo video [PX4 Autopilot Setup Tutorial Preview - YouTube](https://youtu.be/91VGmdSlbo4?t=4m30s)
+
+1. Turn on RC transmitter
+
+2. Start QGC and connect the vehicle
+
+3. `Vehicle setup` > `Radio`
+
+4. Press `Calibrate`
+
+5. Press `OK` to start calibration
+   
+   - ![radio_start_setup](./pic/radio_start_setup.png)
+
+6. Select the transmitter mode that matches your transmitter
+   
+   - `Mode 2` by default
+
+7. Follow the instructions and the diagram to finish the calibration
+   
+   7.1 Move the sticks to the position indicated by text and diagram
+   
+   7.2 Move all other switches and dials through their full range
+   
+   > For no responding when moving switches, please [map the switches to channels](file:///C:/D_Drive/github_repo/PX4-user_guide/notes/transmitter.pdf). 
+   
+   - ![radio_sticks_throttle](./pic/radio_sticks_throttle.png)
+
+8. Press `Next` to save settings
+
+# Flight Modes
+
+> Prerequest: [Configured your radio](#radio_setup)
+
+## Flight Modes and Switches to set
+
+Flight modes should set:
+
+- **Position mode** - Easiest and safest mode for manual flight
+
+- **Return mode** - Return to launch position by safe path and land
+
+- VTOL Transition Switch - not capable for quadrotors
+
+Common modes:
+
+- **Mission** - run a pre-programmed mission sent by ground control station
+
+- **Kill Switch** - Immediately stops all motor outputs (the vehicle will crash, which may be more desirable than allowing it to continue flying in some circumstances)
+
+## Flight Mode Selection
+
+1. Connect the vehicle and turn on RC transmitter
+
+2. QGC > `Vehicle Setup` > `Flight Modes`
+
+3. Select the channel to control `Mode Channel`
+
+4. Move the switch that set up for mode selection in step 3, the mode slot of the current switch position will be highlighted in yellow. 
+
+5. Select the flight mode for each switch position.
+   
+   - ![flight_modes_single_channel](./pic/flight_modes_single_channel.png)
+
+6. Select the channels you want to map to some specific actions, e.g. Return mode, Kill switch, etc.
+
+> Mode Channel Channel 9
+> 
+>     Flight Mode 1 Manual
+> 
+>     Flight Mode 4 Altitude
+> 
+>     Flight Mode 6 Position
+> 
+> Emergency Kill switch channel Channel 12
+> 
+> Return switch channel Channel 10
