@@ -11,6 +11,10 @@
 # Contents
 
 * [Getting Started](./Getting_started.md)
+
 * [Basic Assembly](./Basic_assembly.md)
-* [Basic Configuration](./Basic_configuration.md)
-* 
+- Basic Configuration
+  
+  * [Part 1](./Basic_configuration_part1.md)
+  
+  * [Part 2](./Basic_configuration_part2.md)
